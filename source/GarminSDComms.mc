@@ -49,8 +49,8 @@ class GarminSDComms {
 
   // Build a status message for comms failures.
   // responseCode: null when no HTTP response is received (timeout),
-  // negative for transport errors; includeCommsSuffix adds "COMMS".
-  private function setCommsStatus(responseCode as Number or Null, includeCommsSuffix as Boolean) as Void {
+  // negative for transport errors (treated as comms failures); appendCommsLabel adds "COMMS".
+  private function setCommsStatus(responseCode as Number or Null, appendCommsLabel as Boolean) as Void {
     var statusMessage as String;
     if (responseCode == null || responseCode < 0) {
       // Treat missing or negative response codes as comms failures (e.g. no phone response).
@@ -58,7 +58,7 @@ class GarminSDComms {
     } else {
       statusMessage = Ui.loadResource(Rez.Strings.Error_abbrev).toString() + ": " + responseCode.toString();
     }
-    if (includeCommsSuffix) {
+    if (appendCommsLabel) {
       statusMessage = statusMessage + " " +
         Ui.loadResource(Rez.Strings.Error_request_in_progress).toString();
     }
