@@ -155,7 +155,7 @@ class GarminSDComms {
       needs_update = true;
       if (responseCode <= 0) {
         mAccelHandler.mStatusStr =
-          Ui.loadResource(Rez.Strings.Phone_not_connected_abbrev).toString();
+          Ui.loadResource(Rez.Strings.Phone_not_connected_abbrev);
       } else {
         mAccelHandler.mStatusStr =
           Ui.loadResource(Rez.Strings.Error_abbrev) + ": " + responseCode.toString();
@@ -199,7 +199,7 @@ class GarminSDComms {
       needs_update = true;
       if (responseCode <= 0) {
         mAccelHandler.mStatusStr =
-          Ui.loadResource(Rez.Strings.Phone_not_connected_abbrev).toString();
+          Ui.loadResource(Rez.Strings.Phone_not_connected_abbrev);
       } else {
         mAccelHandler.mStatusStr = "ERR: " + responseCode.toString();
       }
@@ -243,8 +243,8 @@ class GarminSDComms {
           Comm.cancelAllRequests();
           var tagStr = "SDComms.onTick()";
           writeLog(tagStr, "Sending accelData failed");
-          mAccelHandler.mStatusStr =
-            Ui.loadResource(Rez.Strings.Phone_not_connected_abbrev).toString();
+          mAccelHandler.mStatusStr = Ui.loadResource(Rez.Strings.Phone_not_connected_abbrev)
+            + " " + Ui.loadResource(Rez.Strings.Error_request_in_progress);
           mDataRequestInProgress = false;
 
       var vibrationEnabled = Storage.getValue(MENUITEM_VIBRATION) ? true : false;
