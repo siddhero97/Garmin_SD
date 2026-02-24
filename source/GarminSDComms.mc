@@ -51,7 +51,7 @@ class GarminSDComms {
   }
 
   function setCommsStatus(responseCode as Number or Null, includeCommsSuffix as Boolean) as Void {
-    var statusMessage;
+    var statusMessage as String;
     if (responseCode == null || responseCode <= 0) {
       statusMessage =
         Ui.loadResource(Rez.Strings.Phone_not_connected_abbrev).toString();
