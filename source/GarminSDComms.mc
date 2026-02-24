@@ -47,9 +47,6 @@ class GarminSDComms {
     mAccelHandler = accelHandler;
   }
 
-  function onStart() as Void {
-  }
-
   private function setCommsStatus(responseCode as Number or Null, includeCommsSuffix as Boolean) as Void {
     var statusMessage as String;
     if (responseCode == null || responseCode < 0) {

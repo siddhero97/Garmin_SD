@@ -63,7 +63,6 @@ class GarminSDDataHandler {
     // On Start-up we show the app version number in place of satus.
     mStatusStr = versionStr;
     mComms = new GarminSDComms(self);
-    mComms.onStart();
   }
 
   // Return the current set of data as a JSON String
