@@ -49,7 +49,8 @@ class GarminSDComms {
 
   // Build a status message for comms failures.
   // responseCode: null when no HTTP response is received (timeout),
-  // negative for transport errors (treated as comms failures); appendCommsLabel adds "COMMS".
+  // negative for transport errors (treated as comms failures).
+  // appendCommsLabel: true for timeout cases, false for completed request failures.
   private function setCommsStatus(responseCode as Number or Null, appendCommsLabel as Boolean) as Void {
     var statusMessage as String;
     if (responseCode == null || responseCode < 0) {
@@ -60,7 +61,7 @@ class GarminSDComms {
     }
     if (appendCommsLabel) {
       statusMessage = statusMessage + " " +
-        Ui.loadResource(Rez.Strings.Error_request_in_progress).toString();
+        Ui.loadResource(Rez.Strings.Comms_label).toString();
     }
     mAccelHandler.mStatusStr = statusMessage;
   }
