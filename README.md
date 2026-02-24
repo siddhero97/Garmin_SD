@@ -14,6 +14,7 @@ The basic operation is:
   * The seizure detection analysis is carried out on the phone using the [OpenSeizureDetector phone app](https://github.com/OpenSeizureDetector/Android_Pebble_SD).
   * The OpenSeizureDetector Phone App web server sends a response, which includes the alarm status (OK, WARNING, ALARM)
   * If the http request completes successfully, the received response is displayed on the phone screen, if not the garmin [error code](https://developer.garmin.com/connect-iq/api-docs/Toybox/Communications.html) is displayed.
+  * If the phone is not available (e.g. not charged or Garmin Connect is not running), the watch shows "NO PHONE" and retries on the next data send.
 and sends it to the phone.
 
 If the user is doing an activity that is likely to result in a false alarm he/she can press one of the watch buttons or screen to mute the system for 5 minutes to avoid a false alarm.

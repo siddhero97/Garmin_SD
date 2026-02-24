@@ -153,8 +153,13 @@ class GarminSDComms {
     } else {
       // writeLog(tagStr, "needs update 3");
       needs_update = true;
-      mAccelHandler.mStatusStr =
-        Ui.loadResource(Rez.Strings.Error_abbrev) + ": " + responseCode.toString();
+      if (responseCode <= 0) {
+        mAccelHandler.mStatusStr =
+          Ui.loadResource(Rez.Strings.Phone_not_connected_abbrev).toString();
+      } else {
+        mAccelHandler.mStatusStr =
+          Ui.loadResource(Rez.Strings.Error_abbrev) + ": " + responseCode.toString();
+      }
       if (responseCode != lastOnSdStatusReceiveResponse) {
         writeLog(tagStr, "Failure - code =" + responseCode);
         writeLog(tagStr, "Failure - data =" + data);
@@ -192,7 +197,12 @@ class GarminSDComms {
     } else {
       // writeLog(tagStr, "needs update 5");
       needs_update = true;
-      mAccelHandler.mStatusStr = "ERR: " + responseCode.toString();
+      if (responseCode <= 0) {
+        mAccelHandler.mStatusStr =
+          Ui.loadResource(Rez.Strings.Phone_not_connected_abbrev).toString();
+      } else {
+        mAccelHandler.mStatusStr = "ERR: " + responseCode.toString();
+      }
       var soundEnabled = Storage.getValue(MENUITEM_SOUND) ? true : false;
       if (Attention has :playTone && soundEnabled) {
         Attention.playTone(Attention.TONE_LOUD_BEEP);
@@ -233,7 +243,8 @@ class GarminSDComms {
           Comm.cancelAllRequests();
           var tagStr = "SDComms.onTick()";
           writeLog(tagStr, "Sending accelData failed");
-          mAccelHandler.mStatusStr = Ui.loadResource(Rez.Strings.Error_abbrev).toString() + ": " + Ui.loadResource(Rez.Strings.Error_request_in_progress).toString();
+          mAccelHandler.mStatusStr =
+            Ui.loadResource(Rez.Strings.Phone_not_connected_abbrev).toString();
           mDataRequestInProgress = false;
 
       var vibrationEnabled = Storage.getValue(MENUITEM_VIBRATION) ? true : false;
