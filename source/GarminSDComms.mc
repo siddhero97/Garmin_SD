@@ -60,8 +60,8 @@ class GarminSDComms {
         Ui.loadResource(Rez.Strings.Error_abbrev).toString() + ": " + responseCode.toString();
     }
     if (includeCommsSuffix) {
-      statusPrefix = statusPrefix + " "
-        + Ui.loadResource(Rez.Strings.Error_request_in_progress).toString();
+      statusPrefix = statusPrefix + " " +
+        Ui.loadResource(Rez.Strings.Error_request_in_progress).toString();
     }
     mAccelHandler.mStatusStr = statusPrefix;
   }
