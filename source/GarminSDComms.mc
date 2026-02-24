@@ -48,16 +48,16 @@ class GarminSDComms {
   }
 
   function onStart() as Void {
+    // No startup actions required.
   }
 
   function setCommsStatus(responseCode as Number or Null, includeCommsSuffix as Boolean) as Void {
     var statusMessage as String;
     if (responseCode == null || responseCode <= 0) {
-      statusMessage =
-        Ui.loadResource(Rez.Strings.Phone_not_connected_abbrev).toString();
+      // Treat non-positive response codes as no phone connection.
+      statusMessage = Ui.loadResource(Rez.Strings.Phone_not_connected_abbrev).toString();
     } else {
-      statusMessage =
-        Ui.loadResource(Rez.Strings.Error_abbrev).toString() + ": " + responseCode.toString();
+      statusMessage = Ui.loadResource(Rez.Strings.Error_abbrev).toString() + ": " + responseCode.toString();
     }
     if (includeCommsSuffix) {
       statusMessage = statusMessage + " " +
