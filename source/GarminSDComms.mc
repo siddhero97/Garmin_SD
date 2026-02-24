@@ -50,6 +50,22 @@ class GarminSDComms {
   function onStart() as Void {
   }
 
+  function setCommsStatus(responseCode as Number or Null, includeCommsSuffix as Boolean) as Void {
+    var statusPrefix;
+    if (responseCode == null || responseCode <= 0) {
+      statusPrefix =
+        Ui.loadResource(Rez.Strings.Phone_not_connected_abbrev).toString();
+    } else {
+      statusPrefix =
+        Ui.loadResource(Rez.Strings.Error_abbrev).toString() + ": " + responseCode.toString();
+    }
+    if (includeCommsSuffix) {
+      statusPrefix = statusPrefix + " "
+        + Ui.loadResource(Rez.Strings.Error_request_in_progress).toString();
+    }
+    mAccelHandler.mStatusStr = statusPrefix;
+  }
+
   function sendAccelData() as Void {
     //var tagStr = "SDComms.sendAccelData()";
     //writeLog(tagStr, "sendAccelData Start");
@@ -153,13 +169,7 @@ class GarminSDComms {
     } else {
       // writeLog(tagStr, "needs update 3");
       needs_update = true;
-      if (responseCode <= 0) {
-        mAccelHandler.mStatusStr =
-          Ui.loadResource(Rez.Strings.Phone_not_connected_abbrev);
-      } else {
-        mAccelHandler.mStatusStr =
-          Ui.loadResource(Rez.Strings.Error_abbrev) + ": " + responseCode.toString();
-      }
+      setCommsStatus(responseCode, false);
       if (responseCode != lastOnSdStatusReceiveResponse) {
         writeLog(tagStr, "Failure - code =" + responseCode);
         writeLog(tagStr, "Failure - data =" + data);
@@ -197,12 +207,7 @@ class GarminSDComms {
     } else {
       // writeLog(tagStr, "needs update 5");
       needs_update = true;
-      if (responseCode <= 0) {
-        mAccelHandler.mStatusStr =
-          Ui.loadResource(Rez.Strings.Phone_not_connected_abbrev);
-      } else {
-        mAccelHandler.mStatusStr = "ERR: " + responseCode.toString();
-      }
+      setCommsStatus(responseCode, false);
       var soundEnabled = Storage.getValue(MENUITEM_SOUND) ? true : false;
       if (Attention has :playTone && soundEnabled) {
         Attention.playTone(Attention.TONE_LOUD_BEEP);
@@ -243,8 +248,7 @@ class GarminSDComms {
           Comm.cancelAllRequests();
           var tagStr = "SDComms.onTick()";
           writeLog(tagStr, "Sending accelData failed");
-          mAccelHandler.mStatusStr = Ui.loadResource(Rez.Strings.Phone_not_connected_abbrev)
-            + " " + Ui.loadResource(Rez.Strings.Error_request_in_progress);
+          setCommsStatus(null, true);
           mDataRequestInProgress = false;
 
       var vibrationEnabled = Storage.getValue(MENUITEM_VIBRATION) ? true : false;
