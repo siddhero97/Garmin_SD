@@ -51,10 +51,10 @@ class GarminSDComms {
     // Required by app lifecycle; no initialization needed.
   }
 
-  public function setCommsStatus(responseCode as Number or Null, includeCommsSuffix as Boolean) as Void {
+  private function setCommsStatus(responseCode as Number or Null, includeCommsSuffix as Boolean) as Void {
     var statusMessage as String;
     if (responseCode == null || responseCode <= 0) {
-      // Treat non-positive response codes as no phone/HTTP response.
+      // Treat non-positive (including negative) response codes as comms failures/no phone.
       statusMessage = Ui.loadResource(Rez.Strings.Phone_not_connected_abbrev).toString();
     } else {
       statusMessage = Ui.loadResource(Rez.Strings.Error_abbrev).toString() + ": " + responseCode.toString();

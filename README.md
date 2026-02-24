@@ -10,7 +10,7 @@ The app collects accelerometer, heart rate and O2 saturation data (if available 
 The basic operation is:
   * The watch collects 5 seconds worth of acceleromater, heart rate and O2 saturation data
   * It converts the data to a JSON string, which is sent to the web server which is part of the [OpenSeizureDetector phone app](https://github.com/OpenSeizureDetector/Android_Pebble_SD). 
-  * Although it appears on the watch that this is a http POST request, in reality bluetooth (BLE) is used to send the data to the The proprietary [Garmin Connect App](https://play.google.com/store/apps/details?id=com.garmin.android.apps.connectmobile&hl=en_GB), which in turn sents the http request - so the Garmin Connect app is essential for operation of this watch app.
+  * Although it appears on the watch that this is a http POST request, in reality bluetooth (BLE) is used to send the data to the The proprietary [Garmin Connect App](https://play.google.com/store/apps/details?id=com.garmin.android.apps.connectmobile&hl=en_GB), which in turn sends the http request - so the Garmin Connect app is essential for operation of this watch app.
   * The seizure detection analysis is carried out on the phone using the [OpenSeizureDetector phone app](https://github.com/OpenSeizureDetector/Android_Pebble_SD).
   * The OpenSeizureDetector Phone App web server sends a response, which includes the alarm status (OK, WARNING, ALARM)
   * If the http request completes successfully, the received response is displayed on the phone screen, if not the garmin [error code](https://developer.garmin.com/connect-iq/api-docs/Toybox/Communications.html) is displayed.
