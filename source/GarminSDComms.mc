@@ -51,19 +51,19 @@ class GarminSDComms {
   }
 
   function setCommsStatus(responseCode as Number or Null, includeCommsSuffix as Boolean) as Void {
-    var statusPrefix;
+    var statusMessage;
     if (responseCode == null || responseCode <= 0) {
-      statusPrefix =
+      statusMessage =
         Ui.loadResource(Rez.Strings.Phone_not_connected_abbrev).toString();
     } else {
-      statusPrefix =
+      statusMessage =
         Ui.loadResource(Rez.Strings.Error_abbrev).toString() + ": " + responseCode.toString();
     }
     if (includeCommsSuffix) {
-      statusPrefix = statusPrefix + " " +
+      statusMessage = statusMessage + " " +
         Ui.loadResource(Rez.Strings.Error_request_in_progress).toString();
     }
-    mAccelHandler.mStatusStr = statusPrefix;
+    mAccelHandler.mStatusStr = statusMessage;
   }
 
   function sendAccelData() as Void {
