@@ -19,6 +19,13 @@ and sends it to the phone.
 
 If the user is doing an activity that is likely to result in a false alarm he/she can press one of the watch buttons or screen to mute the system for 5 minutes to avoid a false alarm.
 
+# Garmin Incident Detection (Forerunner models)
+Garmin's Incident Detection is separate from this app. For most Forerunner models it:
+  * Only runs during a timed GPS activity (run, walk, bike).
+  * Requires a phone connection to send alerts (text/email with GPS).
+  * Requires setup in Garmin Connect (Safety & Tracking > Safety Features).
+  * Can trigger false alarms on hard stops, drops, or sudden impacts.
+
 # Build Environment
   * Install the latest stable release of the Garmin ConnectIQ Software Developmetn Kit (SDK) from (https://developer.garmin.com/connect-iq/sdk/).  This installs the Garmin SDK Manager.
   * Use the SDK manager to install the latest stable SDK.   **SDK version 6.4.2 or higher is required** to avoid type checking errors.
