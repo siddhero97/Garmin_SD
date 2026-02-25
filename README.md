@@ -10,13 +10,21 @@ The app collects accelerometer, heart rate and O2 saturation data (if available 
 The basic operation is:
   * The watch collects 5 seconds worth of acceleromater, heart rate and O2 saturation data
   * It converts the data to a JSON string, which is sent to the web server which is part of the [OpenSeizureDetector phone app](https://github.com/OpenSeizureDetector/Android_Pebble_SD). 
-  * Although it appears on the watch that this is a http POST request, in reality bluetooth (BLE) is used to send the data to the The proprietary [Garmin Connect App](https://play.google.com/store/apps/details?id=com.garmin.android.apps.connectmobile&hl=en_GB), which in turn sents the http request - so the Garmin Connect app is essential for operation of this watch app.
+  * Although it appears on the watch that this is a http POST request, in reality bluetooth (BLE) is used to send the data to the proprietary [Garmin Connect App](https://play.google.com/store/apps/details?id=com.garmin.android.apps.connectmobile&hl=en_GB), which in turn sends the http request - so the Garmin Connect app is essential for operation of this watch app.
   * The seizure detection analysis is carried out on the phone using the [OpenSeizureDetector phone app](https://github.com/OpenSeizureDetector/Android_Pebble_SD).
   * The OpenSeizureDetector Phone App web server sends a response, which includes the alarm status (OK, WARNING, ALARM)
   * If the http request completes successfully, the received response is displayed on the phone screen, if not the garmin [error code](https://developer.garmin.com/connect-iq/api-docs/Toybox/Communications.html) is displayed.
+  * If the phone is not available (e.g. not charged or Garmin Connect is not running), the watch shows "NO PHONE" and retries on the next data send.
 and sends it to the phone.
 
 If the user is doing an activity that is likely to result in a false alarm he/she can press one of the watch buttons or screen to mute the system for 5 minutes to avoid a false alarm.
+
+# Garmin Incident Detection (Forerunner models)
+Garmin's Incident Detection is separate from this app. For most Forerunner models it:
+  * Only runs during a timed GPS activity (run, walk, bike).
+  * Requires a phone connection to send alerts (text/email with GPS).
+  * Requires setup in Garmin Connect (Safety & Tracking > Safety Features).
+  * Can trigger false alarms on hard stops, drops, or sudden impacts.
 
 # Build Environment
   * Install the latest stable release of the Garmin ConnectIQ Software Developmetn Kit (SDK) from (https://developer.garmin.com/connect-iq/sdk/).  This installs the Garmin SDK Manager.
